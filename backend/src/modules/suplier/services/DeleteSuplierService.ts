@@ -17,7 +17,6 @@ class DeleteSuplierService{
 
         if(!suplier) throw new AppError('Fornecedor nao encontrado !!!');
 
-
         await suplierRepository.remove(suplier);
     }
 }

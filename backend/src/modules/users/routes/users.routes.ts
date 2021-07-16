@@ -17,10 +17,10 @@ const usersController = new UsersController();
     usersController.showUserbyId);
 
     usersRouter.get(
-        '/:email',
+        '/email/:email',
         celebrate({
             [Segments.PARAMS]:{
-            id_usuario: Joi.string().required(),
+            email: Joi.string().required(),
             },
         }),
         usersController.showUserbyEmail);
@@ -37,7 +37,7 @@ const usersController = new UsersController();
     usersController.createUser);
 
     usersRouter.put(
-    '/:id_fornecedor',
+    '/:id_usuario',
     celebrate({
         [Segments.BODY]:{
         nome: Joi.string().required(),

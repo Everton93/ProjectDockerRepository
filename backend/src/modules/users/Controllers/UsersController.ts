@@ -56,13 +56,16 @@ export default class UsersController{
         const {id_usuario} = request.params;
         const updateUserService = new UpdateUsersService();
 
-            return response.json(updateUserService.execute(
+        const user = await updateUserService.execute(
             {
             id_usuario,
             nome,
             email,
             password,
-            }));
+            });
+
+
+        return response.json(user);
     }
 
 }

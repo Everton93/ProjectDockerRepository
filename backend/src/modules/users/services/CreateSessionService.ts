@@ -2,8 +2,10 @@ import AppError from "@shared/errors/error";
 import { getCustomRepository } from "typeorm";
 import { UsersRepository } from "../typeorm/repositories/UsersRepository";
 import Usuario from "../typeorm/entities/Usuario";
-import { compare, hash } from "bcrypt";
-
+import authConfig from '@config/auth'
+import { compare, hash } from "bcryptjs";
+import {sign} from "jsonwebtoken"
+import { boolean } from "joi";
 
 interface Irequest
 {
@@ -14,26 +16,29 @@ interface Irequest
 interface IResponse
 {
     user : Usuario;
+    token: string;
 }
 
 class CreateSessionService
 {
 
-    public async execute ({email, password}: Irequest): Promise<Usuario>{
+     public async execute ({email, password}: Irequest): Promise<IResponse>{
         const usersRepository = getCustomRepository(UsersRepository);
 
-        const passwordHash = await hash(password,10);
-
-        const user = await usersRepository.findByEmailAndPassword(email,password);
+        const user = await usersRepository.findByEmail(email);
 
         if(!user) throw new AppError("email ou senha incorretos!!", 401);
 
-        const confirmPassword = compare(passwordHash, user.password);
+        const confirmPassword = await compare(password, user.password);
 
         if(!confirmPassword) throw new AppError("email ou senha incorretos!!", 401);
 
+        const token = await sign({},authConfig.jwt.secret,{
+            subject : user.id_usuario,
+            expiresIn : authConfig.jwt.expirresIn
+        });
 
-        return user;
+        return {user, token };
     }
 }
 

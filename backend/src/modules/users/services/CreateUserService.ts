@@ -2,7 +2,7 @@ import AppError from "@shared/errors/error";
 import { getCustomRepository } from "typeorm";
 import { UsersRepository } from "../typeorm/repositories/UsersRepository";
 import Usuario from "../typeorm/entities/Usuario";
-import { hash } from "bcrypt";
+import { hash } from "bcryptjs";
 
 
 interface Irequest
@@ -23,12 +23,11 @@ class CreateUsersService
 
         if(user) throw new AppError("Esse Usuario ja consta no sistema !!");
 
-        const passwordHash = await hash(password,10);
 
         const usuario = await usersRepository.create({
             nome,
             email,
-            password : passwordHash
+            password : await hash(password,8)
         });
 
         await usersRepository.save(usuario);
