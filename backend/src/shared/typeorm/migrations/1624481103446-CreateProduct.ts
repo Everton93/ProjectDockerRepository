@@ -59,7 +59,8 @@ export class CreateProduct1624481103446 implements MigrationInterface {
             columnNames: ["fornecedor_id"],
             referencedColumnNames: ["id_fornecedor"],
             referencedTableName: "Fornecedor",
-            onDelete: "SET NULL"
+            onDelete: "CASCADE",
+            onUpdate : "CASCADE"
         }));
     }
 

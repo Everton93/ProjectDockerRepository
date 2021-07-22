@@ -25,8 +25,7 @@ class Produto {
     @UpdateDateColumn()
     data_de_atualizacao : Date;
 
-    @ManyToOne(() => Fornecedor)
-    @JoinColumn({ referencedColumnName : "id_fornecedor" })
+    @ManyToOne(() => Fornecedor, fornecedor => fornecedor.id_fornecedor)
     fornecedor_id : Fornecedor;
 
 }
