@@ -23,13 +23,13 @@ export class UsersTokenRepository extends Repository<UserToken> {
                 });
     }
 
-    public async generate(user_id : string) : Promise<UserToken | undefined>
+    public async generate(usuario_id : string) : Promise<UserToken | undefined>
     {
         const usertoken = await this.create({
-            user_id,
-        });
+           usuario_id ,
+        },);
 
-         await this.save(usertoken)
+         await this.save(usertoken);
 
          return usertoken;
     }

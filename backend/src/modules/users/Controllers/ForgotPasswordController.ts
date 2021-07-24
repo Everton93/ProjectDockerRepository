@@ -10,10 +10,17 @@ export default class ResetPasswordController{
 
         const sendForgotPasswordEmailService = new SendForgotPasswordEmailService();
 
-        await sendForgotPasswordEmailService.execute(email);
+        await sendForgotPasswordEmailService.execute({email});
 
-         return response.status(204).json();
+         return response.json({message : 'ok'});
     }
 
+    public async execute(response : Response) : Promise <Response>
+    {
+
+    console.log("testando requisição !!!")
+
+    return response.json({message : 'ok'});
+    }
 }
 

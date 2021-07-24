@@ -1,6 +1,5 @@
 import {Request , Response} from 'express';
 import ResetPasswordService from '../services/ResetPasswordService';
-import SendForgotPasswordEmailService from '../services/SendForgotPasswordEmailService';
 
 
 export default class ResetPasswordController{
@@ -9,12 +8,11 @@ export default class ResetPasswordController{
     {
         const {password, token} = request.body;
 
-        const resetPasswordService = new ResetPasswordService();
+       // const resetPasswordService = new ResetPasswordService();
 
-        await resetPasswordService.execute({token, password});
+       // await resetPasswordService.execute({token, password});
 
-
-         return response.status(204).json();
+         return response.json({message : password, token });
     }
 
 }

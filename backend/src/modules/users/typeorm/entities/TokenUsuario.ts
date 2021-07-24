@@ -1,5 +1,4 @@
-import { Column, CreateDateColumn, Entity, Generated, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import Usuario from "./Usuario";
+import { Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('TokensDeUsuarios')
 class TokenUsuario
@@ -12,7 +11,7 @@ class TokenUsuario
     token : string;
 
     @Column()
-    user_id : string;
+    usuario_id : string;
 
     @CreateDateColumn()
     data_de_criacao : Date;
@@ -23,4 +22,3 @@ class TokenUsuario
 }
 
 export default TokenUsuario;
-

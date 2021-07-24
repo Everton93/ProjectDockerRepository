@@ -13,7 +13,7 @@ routes.use('/users',usersRouter);
 routes.use('/products',productsRouter);
 routes.use('/suplier',suplierRouter);
 routes.use('/session',sessionRouter);
-routes.use('/password_forgot',passwordRouter);
+routes.use('/password',passwordRouter);
 
 
 export default routes;

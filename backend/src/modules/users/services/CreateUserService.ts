@@ -12,7 +12,6 @@ interface Irequest
     password : string;
 }
 
-
 class CreateUsersService
 {
 
