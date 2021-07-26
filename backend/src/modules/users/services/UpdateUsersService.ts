@@ -26,7 +26,7 @@ class UpdateUsersService
 
         user.nome = nome;
         user.email = email;
-        user.password = await hash(password,8);;
+        user.password = await hash(password,8);
 
         await usersRepository.save(user);
 

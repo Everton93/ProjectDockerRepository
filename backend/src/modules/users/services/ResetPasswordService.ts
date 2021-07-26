@@ -11,6 +11,7 @@ interface Irequest {
 }
 
 class ResetPasswordService {
+
     public async execute({ token, password }: Irequest): Promise<void> {
         const usersRepository = getCustomRepository(UsersRepository);
         const userTokenRepository = getCustomRepository(UsersTokenRepository);
@@ -23,14 +24,15 @@ class ResetPasswordService {
 
         if (!user) throw new AppError("Usuario nao encontrado");
 
-        //const token = await userTokenRepository.generate(user.id_usuario);
-
         const compareDate = addHours(userToken.data_de_criacao, 2);
 
         if (isAfter(Date.now(), compareDate))
             throw new AppError("Token expirado !!");
 
         user.password = await hash(password, 8);
+
+        await usersRepository.save(user);
+
     }
 }
 

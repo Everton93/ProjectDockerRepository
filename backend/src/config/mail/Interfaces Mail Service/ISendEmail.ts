@@ -2,7 +2,7 @@
 interface ISendEmail
 {
     to : IMailContact;
-    from: IMailContact;
+    from?: IMailContact;
     subject : string;
     templateData : IParseMailTemplate;
 }

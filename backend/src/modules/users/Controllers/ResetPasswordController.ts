@@ -8,9 +8,9 @@ export default class ResetPasswordController{
     {
         const {password, token} = request.body;
 
-       // const resetPasswordService = new ResetPasswordService();
+        const resetPasswordService = new ResetPasswordService();
 
-       // await resetPasswordService.execute({token, password});
+        await resetPasswordService.execute({token, password});
 
          return response.json({message : password, token });
     }

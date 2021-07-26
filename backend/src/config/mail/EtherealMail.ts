@@ -23,14 +23,14 @@ export default class EtherealMail{
 
         const message = await transporter.sendMail({
             from : {
-                name : from.name,
-                address: from.email
+                name : from?.name || 'Fake Email Test',
+                address: from?.email || 'fakemailtest@fakemail.com'
             },
             to :{
-                name: to.name || 'Fake Email Test',
-                address : to.email || 'fakemailtest@fakemail.com'
+                name: to.name ,
+                address : to.email
             },
-            subject: 'Recuperação de Senha',
+            subject,
             html : await mailTemplate.parse(templateData)
 
         });

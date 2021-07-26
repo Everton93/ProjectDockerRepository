@@ -23,7 +23,7 @@ export class UsersTokenRepository extends Repository<UserToken> {
                 });
     }
 
-    public async generate(usuario_id : string) : Promise<UserToken | undefined>
+    public async generate(usuario_id : string) : Promise<UserToken>
     {
         const usertoken = await this.create({
            usuario_id ,
