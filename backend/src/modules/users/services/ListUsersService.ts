@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import { UsersRepository } from "../typeorm/repositories/UsersRepository";
-import Fornecedor from "../typeorm/entities/Usuario";
+import { UsersRepository } from "../infrastructure/typeorm/repositories/UsersRepository";
+import Fornecedor from "../infrastructure/typeorm/entities/Usuario";
 
 
 class ListUserService

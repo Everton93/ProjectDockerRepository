@@ -1,4 +1,4 @@
-import Fornecedor from "@modules/suplier/typeorm/entities/Fornecedor";
+import Fornecedor from "@modules/suplier/infrastructure/typeorm/entities/Fornecedor";
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 
 @Entity('Produto')

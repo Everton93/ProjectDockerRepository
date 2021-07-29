@@ -2,6 +2,8 @@ import {Router} from 'express';
 import ForgotPasswordController from '../Controllers/ForgotPasswordController';
 import ResetPasswordController from '../Controllers/ResetPasswordController';
 import { celebrate, Joi, Segments } from 'celebrate';
+import isAuthenticated from '@shared/infrastructure/http/middlewares/isAuthenticated';
+
 
 const passwordRouter = Router();
 const forgotPasswordController = new ForgotPasswordController();

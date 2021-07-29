@@ -1,20 +1,14 @@
 import {Router} from 'express';
 import UsersController from '../Controllers/UsersController';
 import { celebrate, Joi, Segments } from 'celebrate';
+import isAuthenticated from '@shared/infrastructure/http/middlewares/isAuthenticated';
 
 const usersRouter = Router();
 const usersController = new UsersController();
 
-    usersRouter.get('/list',usersController.index);
+usersRouter.use(isAuthenticated);
 
-    usersRouter.get(
-    '/:id_usuario',
-    celebrate({
-        [Segments.PARAMS]:{
-        id_usuario: Joi.string().uuid().required(),
-        },
-    }),
-    usersController.showUserbyId);
+    usersRouter.get('/list',usersController.index);
 
     usersRouter.get(
         '/email/:email',
@@ -35,21 +29,6 @@ const usersController = new UsersController();
         },
     }),
     usersController.createUser);
-
-    usersRouter.put(
-    '/:id_usuario',
-    celebrate({
-        [Segments.BODY]:{
-        nome: Joi.string().required(),
-        email : Joi.string().required(),
-        password : Joi.string().required()
-        },
-        [Segments.PARAMS]:{
-            id_usuario: Joi.string().uuid().required(),
-            },
-    }),
-    usersController.updateUser);
-
 
 
 export default usersRouter;

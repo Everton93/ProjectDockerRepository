@@ -2,6 +2,7 @@ import {Router} from 'express';
 import SessionsController from '../Controllers/SessionsController';
 import { celebrate, Joi, Segments } from 'celebrate';
 
+
 const sessionsRouter = Router();
 const sessionsController = new SessionsController();
 

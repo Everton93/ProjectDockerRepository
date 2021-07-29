@@ -1,9 +1,9 @@
 import {Request , Response} from 'express';
-import CreateSuplierService from '../services/CreateSuplierService';
-import ShowSupplierService from '../services/ShowSuplierService';
-import ListSuplierService from '../services/ListSuplierService';
-import UpdateSuplierService from '../services/UpdateSuplierSevice';
-import DeleteSuplierService from '../services/DeleteSuplierService';
+import CreateSuplierService from '../../../services/CreateSuplierService';
+import ShowSupplierService from '../../../services/ShowSuplierService';
+import ListSuplierService from '../../../services/ListSuplierService';
+import UpdateSuplierService from '../../../services/UpdateSuplierSevice';
+import DeleteSuplierService from '../../../services/DeleteSuplierService';
 
 
 export default class SuplierController{

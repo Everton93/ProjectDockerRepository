@@ -1,7 +1,7 @@
 import AppError from "@shared/errors/error";
 import { getCustomRepository } from "typeorm";
-import { SuplierRepository } from "../typeorm/repositories/SuplierRepository";
-import Fornecedor from "../typeorm/entities/Fornecedor";
+import { SuplierRepository } from "../infrastructure/typeorm/repositories/SuplierRepository";
+import Fornecedor from "../infrastructure/typeorm/entities/Fornecedor";
 
 
 interface Irequest
