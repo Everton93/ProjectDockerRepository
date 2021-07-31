@@ -31,6 +31,7 @@
     "sqlite": "^4.0.23",
     "sqlite3": "^5.0.2",
     "ts-node": "^10.0.0",
+    "tsyringe": "^4.6.0",
     "typeorm": "^0.2.34"
   },
   "devDependencies": {

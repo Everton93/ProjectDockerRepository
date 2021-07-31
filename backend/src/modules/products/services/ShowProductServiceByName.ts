@@ -1,20 +1,21 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { ProductsRepository } from "../infrastructure/typeorm/repositories/ProductsRepository";
-import Produto from "../infrastructure/typeorm/entities/Produto";
+import { inject, injectable } from "tsyringe";
+import IProduct from "../Domain/Models/IProduct";
+import IShowProductByName from "../Domain/Models/IShowProductByName";
+import IProductRepository from "../Domain/Repository/IProductRepository";
 
-interface Irequest
-{
-    nome :string;
-}
-
-class ShowProductServiceByName
+@injectable()
+export default class ShowProductServiceByName
 {
 
-    public async execute ({nome}: Irequest): Promise<Produto | undefined>{
-        const productsRepository = getCustomRepository(ProductsRepository);
+    constructor(
+        @inject("productRepository")
+        private productRepository: IProductRepository
+    ) {}
 
-        const produto = await productsRepository.findByName(nome);
+    public async executeSearchByName ({nome}: IShowProductByName): Promise<IProduct | undefined>{
+
+        const produto = await this.productRepository.findByName(nome);
 
         if(!produto)
         {
@@ -25,7 +26,6 @@ class ShowProductServiceByName
     }
 }
 
-export default ShowProductServiceByName;
 
 
 

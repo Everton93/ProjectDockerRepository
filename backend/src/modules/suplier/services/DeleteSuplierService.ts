@@ -1,24 +1,20 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { SuplierRepository } from "../infrastructure/typeorm/repositories/SuplierRepository";
+import { inject, injectable } from "tsyringe";
+import ISuplierRepository from "../Domain/Repository/ISuplierRepository";
+import IDeleteSuplier from "../Domain/Models/IDeleteSuplier";
 
+@injectable()
+export default class DeleteSuplierService {
+    constructor(
+        @inject("SuplierRepository")
+        private suplierRepository: ISuplierRepository
+    ) {}
 
-interface Irequest
-{
-    id_fornecedor: string;
-}
+    public async execute({ id_fornecedor }: IDeleteSuplier): Promise<void> {
+        const suplier = await this.suplierRepository.findById(id_fornecedor);
 
-class DeleteSuplierService{
+        if (!suplier) throw new AppError("Fornecedor nao encontrado !!!");
 
-    public async execute ({id_fornecedor}: Irequest): Promise<void>{
-        const suplierRepository = getCustomRepository(SuplierRepository);
-
-        const suplier = await suplierRepository.findOne(id_fornecedor);
-
-        if(!suplier) throw new AppError('Fornecedor nao encontrado !!!');
-
-        await suplierRepository.remove(suplier);
+        await this.suplierRepository.delete(suplier);
     }
 }
-
-export default DeleteSuplierService;

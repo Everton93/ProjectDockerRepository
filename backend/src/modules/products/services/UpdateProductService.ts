@@ -1,28 +1,25 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { ProductsRepository } from "../infrastructure/typeorm/repositories/ProductsRepository";
-import Produto from "../infrastructure/typeorm/entities/Produto";
+import { inject, injectable } from "tsyringe";
+import IProduct from "../Domain/Models/IProduct";
+import IUpdateProduct from "../Domain/Models/IUpdateProject";
+import IProductRepository from "../Domain/Repository/IProductRepository";
 
-
-interface Irequest
-{
-    id_produto: string;
-    nome :string;
-    descricao : string;
-    preco : number;
-    quantidade : number;
-}
-
+@injectable()
 class UpdateProductService
 {
 
-    public async execute ({id_produto ,
+    constructor(
+        @inject("productRepository")
+        private productRepository: IProductRepository
+    ) {}
+
+    public async executeUpdate ({id_produto ,
         nome,
         descricao,
         preco,
-        quantidade}: Irequest): Promise<Produto | undefined>{
-        const productsRepository = getCustomRepository(ProductsRepository);
-        const product = await productsRepository.findOne(id_produto);
+        quantidade}: IUpdateProduct): Promise<IProduct | undefined>{
+
+        const product = await this.productRepository.findById(id_produto);
 
         if(!product) throw new AppError('Produto não encontrado!!');
 
@@ -31,7 +28,7 @@ class UpdateProductService
         product.preco = preco;
         product.quantidade = quantidade;
 
-        return await productsRepository.save(product);
+        return await this.productRepository.save(product);
     }
 }
 

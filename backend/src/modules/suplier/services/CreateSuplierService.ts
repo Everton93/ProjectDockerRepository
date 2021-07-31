@@ -1,37 +1,29 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { SuplierRepository } from "../infrastructure/typeorm/repositories/SuplierRepository";
-import Fornecedor from "../infrastructure/typeorm/entities/Fornecedor";
-
-
-interface Irequest
+import ICreateSuplier from "../Domain/Models/ICreateSuplier";
+import { inject, injectable } from "tsyringe";
+import ISuplier from "../Domain/Models/ISupplier";
+import ISuplierRepository from "../Domain/Repository/ISuplierRepository";
+@injectable()
+export default class CreateSuplierService
 {
-    nome :string;
-    email : string;
-    whatsapp : string;
-}
+    constructor(
+        @inject('SuplierRepository')
+        private suplierRepository : ISuplierRepository
+         ){}
 
+    public async execute ({nome, email, whatsapp}: ICreateSuplier): Promise<ISuplier>{
 
-class CreateSuplierService
-{
-
-    public async execute ({nome, email, whatsapp}: Irequest): Promise<Fornecedor>{
-        const suplierRepository = getCustomRepository(SuplierRepository);
-
-        const suplier = await suplierRepository.findByName(nome);
+        const suplier = await this.suplierRepository.findByName(nome);
 
         if(suplier) throw new AppError("Esse Fornecedor ja consta no sistema !!");
 
-        const fornecedor = await suplierRepository.create({
+        const fornecedor = await this.suplierRepository.create({
             nome,
             email,
             whatsapp
         });
 
-        await suplierRepository.save(fornecedor);
-
         return fornecedor;
     }
 }
 
-export default CreateSuplierService;

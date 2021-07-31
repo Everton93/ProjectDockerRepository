@@ -1,21 +1,20 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { SuplierRepository } from "../infrastructure/typeorm/repositories/SuplierRepository";
-import Fornecedor from "../infrastructure/typeorm/entities/Fornecedor";
+import { inject, injectable } from "tsyringe";
+import ISuplier from "../Domain/Models/ISupplier";
+import ISuplierRepository from "../Domain/Repository/ISuplierRepository";
+import IShowSuplier from "../Domain/Models/IShowSuplier";
 
-
-interface Irequest
+@injectable()
+export default class ShowSuplierService
 {
-    id_fornecedor: string;
-}
+    constructor(
+        @inject("SuplierRepository")
+        private suplierRepository: ISuplierRepository
+    ) {}
 
-class ShowSuplierService
-{
+    public async executeforsSearch ({id_fornecedor}: IShowSuplier): Promise<ISuplier | undefined>{
 
-    public async executeforsSearch ({id_fornecedor}: Irequest): Promise<Fornecedor | undefined>{
-        const suplierRepository = getCustomRepository(SuplierRepository);
-
-        const fornecedor = await suplierRepository.findByid(id_fornecedor);
+        const fornecedor = await this.suplierRepository.findById(id_fornecedor);
 
         if(!fornecedor)  throw new AppError('Fornecedor nao encontrado !!');
 
@@ -24,4 +23,3 @@ class ShowSuplierService
 
 }
 
-export default ShowSuplierService;

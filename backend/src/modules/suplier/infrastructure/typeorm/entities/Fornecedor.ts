@@ -1,7 +1,8 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import ISuplier from "@modules/suplier/Domain/Models/ISupplier";
 
 @Entity('Fornecedor')
-class Fornecedor {
+class Fornecedor implements ISuplier {
 
     @PrimaryGeneratedColumn('uuid')
     id_fornecedor : string;

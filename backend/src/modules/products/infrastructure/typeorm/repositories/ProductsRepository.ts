@@ -1,28 +1,61 @@
-import { EntityRepository, Repository, getConnection } from "typeorm";
-import Product from '../entities/Produto';
+import ICreateProduct from "@modules/products/Domain/Models/ICreateProduct";
+import IProduct from "@modules/products/Domain/Models/IProduct";
+import IProductRepository from "@modules/products/Domain/Repository/IProductRepository";
+import { Repository, getRepository } from "typeorm";
+import Product from "../entities/Produto";
 
-@EntityRepository(Product)
-export class ProductsRepository extends Repository<Product> {
+export class ProductsRepository implements IProductRepository {
+    private ormRepository: Repository<Product>;
 
-    public async findByName(nome: string) : Promise<Product | undefined>
-    {
-            return await this.findOne({
-                where: {
+    constructor() {
+        this.ormRepository = getRepository(Product);
+    }
+
+    public async findAll(): Promise<IProduct[] | undefined> {
+        return this.ormRepository.find();
+    }
+
+    public async findById(id_produto: string): Promise<IProduct | undefined> {
+        return await this.ormRepository.findOne({
+            where: {
+                id_produto: id_produto,
+            },
+        });
+    }
+
+    public async findByName(nome: string): Promise<Product | undefined> {
+        return await this.ormRepository.findOne({
+            where: {
                 nome,
-                },
-                });
+            },
+        });
     }
 
-    public async findByid(id_produto: string) : Promise<Product | undefined>
-    {
-            return await this.findOne({
-                where: {
-                id_produto : id_produto,
-                },
-                });
+    public async create({
+        nome,
+        descricao,
+        preco,
+        quantidade,
+    }: ICreateProduct): Promise<IProduct> {
+        const createProduct = await this.ormRepository.create({
+            nome,
+            descricao,
+            preco,
+            quantidade,
+        });
+
+        return await this.ormRepository.save(createProduct);
     }
 
-/*     public async findByidSupplier(id_fornecedor: string) : Promise<Product | undefined>
+    public async save(product: IProduct): Promise<IProduct> {
+        return this.ormRepository.save(product);
+    }
+
+    public async delete(product: IProduct): Promise<void> {
+        await this.ormRepository.delete(product);
+    }
+
+    /*     public async findByidSupplier(id_fornecedor: string) : Promise<Product | undefined>
     {
             return await this.findOne({
                 where: {

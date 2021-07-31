@@ -1,26 +1,24 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { SuplierRepository } from "../infrastructure/typeorm/repositories/SuplierRepository";
-import Fornecedor from "../infrastructure/typeorm/entities/Fornecedor";
+import { inject, injectable } from "tsyringe";
+import ISuplier from "../Domain/Models/ISupplier";
+import IUpdateSuplier from "../Domain/Models/IUpdateSuplier";
+import ISuplierRepository from "../Domain/Repository/ISuplierRepository";
 
-
-interface Irequest
+@injectable()
+export default class UpdateSuplierService
 {
-    id_fornecedor: string;
-    nome :string;
-    email : string;
-    whatsapp : string;
-}
 
-class UpdateSuplierService
-{
+    constructor(
+        @inject("SuplierRepository")
+        private suplierRepository: ISuplierRepository
+    ) {}
 
     public async execute ({id_fornecedor ,
         nome,
         email,
-        whatsapp}: Irequest): Promise<Fornecedor | undefined>{
-        const suplierRepository = getCustomRepository(SuplierRepository);
-        const suplier = await suplierRepository.findOne(id_fornecedor);
+        whatsapp}: IUpdateSuplier): Promise<ISuplier | undefined>{
+
+        const suplier = await this.suplierRepository.findById(id_fornecedor);
 
         if(!suplier) throw new AppError('Fornecedor não encontrado!!');
 
@@ -28,8 +26,7 @@ class UpdateSuplierService
         suplier.email = email;
         suplier.whatsapp = whatsapp;
 
-        return await suplierRepository.save(suplier);
+        return await this.suplierRepository.save(suplier);
     }
 }
 
-export default UpdateSuplierService;

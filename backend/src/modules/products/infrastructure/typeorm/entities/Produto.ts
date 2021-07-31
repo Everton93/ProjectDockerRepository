@@ -1,8 +1,9 @@
+import IProduct from "@modules/products/Domain/Models/IProduct";
 import Fornecedor from "@modules/suplier/infrastructure/typeorm/entities/Fornecedor";
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 
 @Entity('Produto')
-class Produto {
+class Produto implements IProduct {
 
     @PrimaryGeneratedColumn('uuid')
     id_produto : string;
@@ -25,7 +26,7 @@ class Produto {
     @UpdateDateColumn()
     data_de_atualizacao : Date;
 
-    @ManyToOne(() => Fornecedor, fornecedor => fornecedor.id_fornecedor)
+    @ManyToOne(() => Fornecedor , fornecedor => fornecedor.id_fornecedor)
     fornecedor_id : Fornecedor;
 
 }

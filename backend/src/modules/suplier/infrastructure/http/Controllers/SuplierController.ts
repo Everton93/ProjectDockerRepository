@@ -1,4 +1,5 @@
 import {Request , Response} from 'express';
+import { container } from 'tsyringe';
 import CreateSuplierService from '../../../services/CreateSuplierService';
 import ShowSupplierService from '../../../services/ShowSuplierService';
 import ListSuplierService from '../../../services/ListSuplierService';
@@ -8,9 +9,9 @@ import DeleteSuplierService from '../../../services/DeleteSuplierService';
 
 export default class SuplierController{
 
-    public async index (request : Request, response : Response):Promise<Response>
+    public async index (response : Response):Promise<Response>
     {
-        const listSupliers = new ListSuplierService();
+        const listSupliers = container.resolve(ListSuplierService);
         const suplierList = await listSupliers.execute();
 
         return response.json(suplierList);
@@ -20,7 +21,7 @@ export default class SuplierController{
     {
         const {id_fornecedor} = request.params;
 
-        const showSuplierService = new ShowSupplierService();
+        const showSuplierService = container.resolve(ShowSupplierService);
 
         const suplier = await showSuplierService.executeforsSearch({id_fornecedor});
 
@@ -31,7 +32,7 @@ export default class SuplierController{
     {
         const {nome, email, whatsapp} = request.body;
 
-        const createSuplierService = new CreateSuplierService();
+        const createSuplierService = container.resolve(CreateSuplierService);
 
         const suplier = await createSuplierService.execute({nome, email, whatsapp});
 
@@ -42,7 +43,9 @@ export default class SuplierController{
     {
         const {nome, email, whatsapp} = request.body;
         const {id_fornecedor} = request.params;
-        const updateSuplierService = new UpdateSuplierService();
+
+        const updateSuplierService = container.resolve(UpdateSuplierService);
+
 
             return response.json(updateSuplierService.execute(
             {
@@ -57,7 +60,7 @@ export default class SuplierController{
     {
          const {id_fornecedor} = request.params;
 
-        const deleteSuplierService = new DeleteSuplierService();
+        const deleteSuplierService = container.resolve(DeleteSuplierService);
 
         await deleteSuplierService.execute({id_fornecedor});
 
@@ -65,4 +68,3 @@ export default class SuplierController{
     }
 
 }
-

@@ -1,26 +1,67 @@
-import { EntityRepository, Repository } from "typeorm";
+import ICreateSuplier from "@modules/suplier/Domain/Models/ICreateSuplier";
+import ISupplier from "@modules/suplier/Domain/Models/ISupplier";
+import ISuplierRepository from "@modules/suplier/Domain/Repository/ISuplierRepository";
+import { getRepository,EntityRepository, Repository } from "typeorm";
 import Suplier from '../entities/Fornecedor';
 
 
-@EntityRepository(Suplier)
-export class SuplierRepository extends Repository<Suplier> {
+export class SuplierRepository implements ISuplierRepository {
+
+    private ormRepository : Repository<Suplier>
+
+    constructor(){
+         this.ormRepository = getRepository(Suplier);
+    }
 
     public async findByName(nome: string) : Promise<Suplier | undefined>
     {
-            return await this.findOne({
+            return await this.ormRepository.findOne({
                 where: {
                 nome,
                 },
                 });
     }
 
-    public async findByid(id_fornecedor: string) : Promise<Suplier | undefined>
+    public async findById(id_fornecedor: string) : Promise<Suplier | undefined>
     {
-            return await this.findOne({
+            return await this.ormRepository.findOne({
                 where: {
-                id_fornecedor : id_fornecedor,
+                id_fornecedor,
                 },
                 });
+    }
+
+    public async findByEmail(email: string) : Promise<Suplier | undefined>
+    {
+            return await this.ormRepository.findOne({
+                where: {
+                email,
+                },
+                });
+    }
+
+    public async create({nome, email, whatsapp}: ICreateSuplier): Promise<ISupplier> {
+        const suplier = await this.ormRepository.create({nome, email,whatsapp});
+
+        await this.save(suplier);
+
+        return suplier;
+
+    }
+    public async save(suplier: ISupplier): Promise<ISupplier>
+    {
+        return await this.ormRepository.save(suplier);
+
+    }
+
+    public async findAll(): Promise<ISupplier[] | undefined>
+    {
+        return await this.ormRepository.find();
+    }
+
+    public async delete(suplier: ISupplier): Promise<void>
+    {
+         await this.ormRepository.delete(suplier);
     }
 
 }

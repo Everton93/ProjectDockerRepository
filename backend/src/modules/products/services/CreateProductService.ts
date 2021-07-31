@@ -1,39 +1,32 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { ProductsRepository } from "../infrastructure/typeorm/repositories/ProductsRepository";
-import Produto from "../infrastructure/typeorm/entities/Produto";
+import { inject, injectable } from "tsyringe";
+import ICreateProduct from "../Domain/Models/ICreateProduct";
+import IProduct from "../Domain/Models/IProduct";
+import IProductRepository from "../Domain/Repository/IProductRepository";
 
-interface Irequest
-{
-    nome :string;
-    descricao : string;
-    preco : number;
-    quantidade : number;
-}
+@injectable()
+export default class CreateProductService {
+    constructor(
+        @inject("productRepository")
+        private productRepository: IProductRepository
+    ) {}
 
-class CreateProductService
-{
+    public async executeCreate({
+        nome,
+        descricao,
+        preco,
+        quantidade,
+    }: ICreateProduct): Promise<IProduct> {
 
-    public async execute ({nome, descricao, preco, quantidade}: Irequest): Promise<Produto>{
-        const productsRepository = getCustomRepository(ProductsRepository);
+        const product = await this.productRepository.findByName(nome);
 
-        const product = await productsRepository.findByName(nome);
+        if (product) throw new AppError("Esse Produto ja consta no sistema !!");
 
-        if(product) throw new AppError("Esse Produto ja consta no sistema !!");
-
-        const produto = await productsRepository.create({
+        return await this.productRepository.create({
             nome,
             descricao,
             preco,
-            quantidade
-        });
-
-        await productsRepository.save(produto);
-
-        return produto;
+            quantidade,
+        });;
     }
 }
-
-export default CreateProductService;
-
-
