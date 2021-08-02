@@ -1,28 +1,26 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { UsersRepository } from "../infrastructure/typeorm/repositories/UsersRepository";
-import Usuario from "../infrastructure/typeorm/entities/Usuario";
+import { inject, injectable } from "tsyringe";
+import IUserRepository from "@modules/users/Domain/Repository/IUserRepository";
+import IUser from "@modules/users/Domain/Models/IUser";
+import IShowUserByEmail from "@modules/users/Domain/Models/IShowUserByEmail";
 
 
-interface Irequest
-{
-    email : string;
-}
-
-
-class ShowUserServiceByemail
+@injectable()
+export default class ShowUserServiceByemail
 {
 
-    public async executeforsSearch ({email}: Irequest): Promise<Usuario | undefined>{
-        const usersRepository = getCustomRepository(UsersRepository);
+    constructor(
+        @inject('UsersRepository')
+        private usersRepository : IUserRepository
+         ){}
 
-        const usuario = await usersRepository.findByEmail(email);
+    public async executeSearchByEmail ({email}: IShowUserByEmail): Promise<IUser | undefined>{
+
+        const usuario = await this.usersRepository.findByEmail(email);
 
         if(!usuario)  throw new AppError('Usuario nao encontrado !!');
 
         return usuario;
     }
-
 }
 
-export default ShowUserServiceByemail;

@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 import ISuplier from "@modules/suplier/Domain/Models/ISupplier";
 
 @Entity('Fornecedor')
-class Fornecedor implements ISuplier {
+export default class Fornecedor implements ISuplier {
 
     @PrimaryGeneratedColumn('uuid')
     id_fornecedor : string;
@@ -24,5 +24,5 @@ class Fornecedor implements ISuplier {
 
 }
 
-export default Fornecedor;
+
 

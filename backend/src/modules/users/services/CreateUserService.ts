@@ -1,38 +1,33 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { UsersRepository } from "../infrastructure/typeorm/repositories/UsersRepository";
-import Usuario from "../infrastructure/typeorm/entities/Usuario";
 import { hash } from "bcryptjs";
-
-
-interface Irequest
-{
-    nome :string;
-    email : string;
-    password : string;
-}
-
-class CreateUsersService
+import { inject, injectable } from "tsyringe";
+import ICreateUser from "@modules/users/Domain/Models/ICreateUser";
+import IUserRepository from "@modules/users/Domain/Repository/IUserRepository";
+import IUser from "@modules/users/Domain/Models/IUser";
+@injectable()
+export default class CreateUsersService
 {
 
-    public async execute ({nome, email, password}: Irequest): Promise<Usuario>{
-        const usersRepository = getCustomRepository(UsersRepository);
+    constructor(
+        @inject('UsersRepository')
+        private usersRepository : IUserRepository
+         ){}
 
-        const user = await usersRepository.findByEmail(email);
+    public async executeCreateUser ({nome, email, password}: ICreateUser): Promise<IUser>{
+
+        const user = await this.usersRepository.findByEmail(email);
 
         if(user) throw new AppError("Esse Usuario ja consta no sistema !!");
 
-
-        const usuario = await usersRepository.create({
+        const usuario = await this.usersRepository.create({
             nome,
             email,
             password : await hash(password,8)
         });
 
-        await usersRepository.save(usuario);
+        await this.usersRepository.save(usuario);
 
         return usuario;
     }
 }
 
-export default CreateUsersService;

@@ -1,8 +1,10 @@
 import AppError from "@shared/errors/error";
-import ICreateSuplier from "../Domain/Models/ICreateSuplier";
 import { inject, injectable } from "tsyringe";
-import ISuplier from "../Domain/Models/ISupplier";
-import ISuplierRepository from "../Domain/Repository/ISuplierRepository";
+import ICreateSuplier from "@modules/suplier/Domain/Models/ICreateSuplier";
+import ISuplier from "@modules/suplier/Domain/Models/ISupplier";
+import ISuplierRepository from "@modules/suplier/Domain/Repository/ISuplierRepository";
+
+
 @injectable()
 export default class CreateSuplierService
 {

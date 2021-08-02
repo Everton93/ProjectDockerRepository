@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
-import IProductRepository from "../Domain/Repository/IProductRepository";
-import IProduct from "../Domain/Models/IProduct";
+import IProductRepository from "@modules/products/Domain/Repository/IProductRepository";
+import IProduct from "@modules/products/Domain/Models/IProduct";
 
 @injectable()
 export default class ListProductService

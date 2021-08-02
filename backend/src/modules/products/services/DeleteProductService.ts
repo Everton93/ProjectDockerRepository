@@ -1,7 +1,7 @@
 import AppError from "@shared/errors/error";
 import { inject, injectable } from "tsyringe";
-import IProductRepository from "../Domain/Repository/IProductRepository";
-import IDeleteProduct from "../Domain/Models/IDeleteProduct";
+import IProductRepository from "@modules/products/Domain/Repository/IProductRepository";
+import IDeleteProduct from "@modules/products/Domain/Models/IDeleteProduct";
 
 @injectable()
 export default class DeleteProductService

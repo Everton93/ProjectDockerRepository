@@ -1,8 +1,8 @@
 import AppError from "@shared/errors/error";
 import { inject, injectable } from "tsyringe";
-import ICreateProduct from "../Domain/Models/ICreateProduct";
-import IProduct from "../Domain/Models/IProduct";
-import IProductRepository from "../Domain/Repository/IProductRepository";
+import ICreateProduct from "@modules/products/Domain/Models/ICreateProduct";
+import IProduct from "@modules/products/Domain/Models/IProduct";
+import IProductRepository from "@modules/products/Domain/Repository/IProductRepository";
 
 @injectable()
 export default class CreateProductService {

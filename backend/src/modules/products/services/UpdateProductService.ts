@@ -1,7 +1,7 @@
 import AppError from "@shared/errors/error";
 import { inject, injectable } from "tsyringe";
 import IProduct from "../Domain/Models/IProduct";
-import IUpdateProduct from "../Domain/Models/IUpdateProject";
+import IUpdateProduct from "../Domain/Models/IUpdateProduct";
 import IProductRepository from "../Domain/Repository/IProductRepository";
 
 @injectable()

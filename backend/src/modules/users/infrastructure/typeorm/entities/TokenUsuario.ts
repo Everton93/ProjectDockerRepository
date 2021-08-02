@@ -1,7 +1,8 @@
+import ITokenUser from "@modules/users/Domain/Models/ITokenUser";
 import { Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('TokensDeUsuarios')
-class TokenUsuario
+export default class TokenUsuario implements ITokenUser
 {
     @PrimaryGeneratedColumn('uuid')
     id_token : string;
@@ -21,4 +22,3 @@ class TokenUsuario
 
 }
 
-export default TokenUsuario;

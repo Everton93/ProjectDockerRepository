@@ -1,28 +1,23 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { UsersRepository } from "../infrastructure/typeorm/repositories/UsersRepository";
-import Usuario from "../infrastructure/typeorm/entities/Usuario";
+import { inject, injectable } from "tsyringe";
+import IUserRepository from "@modules/users/Domain/Repository/IUserRepository";
+import IUser from "@modules/users/Domain/Models/IUser";
+import IShowUserById from "@modules/users/Domain/Models/IShowUserById";
 
-
-interface Irequest
+@injectable()
+export default class ShowUserServiceById
 {
-    id_usuario : string;
-}
+    constructor(
+        @inject('UsersRepository')
+        private usersRepository : IUserRepository
+         ){}
 
+    public async executeSearchById ({id_usuario}: IShowUserById): Promise<IUser | undefined>{
 
-class ShowUserServiceById
-{
-
-    public async executeforsSearch ({id_usuario}: Irequest): Promise<Usuario | undefined>{
-        const usersRepository = getCustomRepository(UsersRepository);
-
-        const usuario = await usersRepository.findById(id_usuario);
+        const usuario = await this.usersRepository.findById(id_usuario);
 
         if(!usuario)  throw new AppError('Usuario nao encontrado !!');
 
         return usuario;
     }
-
 }
-
-export default ShowUserServiceById;

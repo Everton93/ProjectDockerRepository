@@ -1,8 +1,8 @@
 import AppError from "@shared/errors/error";
 import { inject, injectable } from "tsyringe";
-import ISuplier from "../Domain/Models/ISupplier";
-import ISuplierRepository from "../Domain/Repository/ISuplierRepository";
-import IShowSuplier from "../Domain/Models/IShowSuplier";
+import ISuplier from "@modules/suplier/Domain/Models/ISupplier";
+import ISuplierRepository from "@modules/suplier/Domain/Repository/ISuplierRepository";
+import IShowSuplier from "@modules/suplier/Domain/Models/IShowSuplier";
 
 @injectable()
 export default class ShowSuplierService

@@ -1,10 +1,6 @@
-import { getCustomRepository } from "typeorm";
-import { SuplierRepository } from "../infrastructure/typeorm/repositories/SuplierRepository";
-import Fornecedor from "../infrastructure/typeorm/entities/Fornecedor";
-
 import { inject, injectable } from "tsyringe";
-import ISuplier from "../Domain/Models/ISupplier";
-import ISuplierRepository from "../Domain/Repository/ISuplierRepository";
+import ISuplier from "@modules/suplier/Domain/Models/ISupplier";
+import ISuplierRepository from "@modules/suplier/Domain/Repository/ISuplierRepository";
 
 @injectable()
 export default class ListSuplierService

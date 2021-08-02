@@ -1,26 +1,28 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { UsersRepository } from "../infrastructure/typeorm/repositories/UsersRepository";
-import { UsersTokenRepository } from "../infrastructure/typeorm/repositories/UserTokenRepository";
 import { isAfter, addHours } from "date-fns";
 import { hash } from "bcryptjs";
+import { inject, injectable } from "tsyringe";
+import IUserRepository from "@modules/users/Domain/Repository/IUserRepository";
+import IUserTokenRepository from "@modules/users/Domain/Repository/IUserTokenRepository";
+import IResetPassword from "@modules/users/Domain/Models/IResetPassword";
 
-interface Irequest {
-    token: string;
-    password: string;
-}
+@injectable()
+export default class ResetPasswordService {
 
-class ResetPasswordService {
+    constructor(
+        @inject('UsersRepository')
+        private userRepository : IUserRepository,
 
-    public async execute({ token, password }: Irequest): Promise<void> {
-        const usersRepository = getCustomRepository(UsersRepository);
-        const userTokenRepository = getCustomRepository(UsersTokenRepository);
+        private userTokenRepository : IUserTokenRepository
+        ){}
 
-        const userToken = await userTokenRepository.findByToken(token);
+    public async executeResetPassword({ token, password }: IResetPassword): Promise<void> {
+
+        const userToken = await this.userTokenRepository.findByToken(token);
 
         if (!userToken) throw new AppError("Usuario nao encontrado");
 
-        const user = await usersRepository.findById(userToken.usuario_id);
+        const user = await this.userRepository.findById(userToken.usuario_id);
 
         if (!user) throw new AppError("Usuario nao encontrado");
 
@@ -31,9 +33,7 @@ class ResetPasswordService {
 
         user.password = await hash(password, 8);
 
-        await usersRepository.save(user);
-
+        await this.userRepository.save(user);
     }
 }
 
-export default ResetPasswordService;

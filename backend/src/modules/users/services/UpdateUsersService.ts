@@ -1,35 +1,54 @@
 import AppError from "@shared/errors/error";
-import { getCustomRepository } from "typeorm";
-import { UsersRepository } from "../infrastructure/typeorm/repositories/UsersRepository";
-import Usuario from "../infrastructure/typeorm/entities/Usuario";
 import {hash , compare} from "bcryptjs"
+import { inject, injectable } from "tsyringe";
+import IUserRepository from "@modules/users/Domain/Repository/IUserRepository";
+import IUser from "@modules/users/Domain/Models/IUser";
+import IUpdateUser from "@modules/users/Domain/Models/IUpdateUser";
 
-
-interface Irequest
-{
-    id_usuario : string,
-    nome :string;
-    email : string;
-    password?: string;
-    old_password? : string;
-}
-
-class UpdateUsersService
+@injectable()
+export default class UpdateUsersService
 {
 
-    public async execute ({ id_usuario, nome, email, password, old_password}: Irequest): Promise<Usuario>{
+    constructor(
+        @inject('UsersRepository')
+        private usersRepository : IUserRepository
+         ){}
 
-        const usersRepository = getCustomRepository(UsersRepository);
+    public async executeUpdateUser ({
+        id_usuario,
+        nome,
+        email,
+        password,
+        old_password
+        }: IUpdateUser): Promise<IUser>{
 
-        const user = await usersRepository.findById(id_usuario);
+        const user = await this.usersRepository.findById(id_usuario);
 
         if(!user) throw new AppError("Usuario não encontrado !!");
 
-        const userUpdateEmail = await usersRepository.findByEmail(email);
+        await this.validateEmail(email, id_usuario);
+
+        await this.validatePassword(password, old_password, user);
+
+        user.nome = nome;
+        user.email = email;
+
+        return await this.usersRepository.save(user);
+    }
+
+    private async validateEmail (email : string, id_usuario : string) : Promise <void>
+    {
+        const userUpdateEmail = await this.usersRepository.findByEmail(email);
 
         if (userUpdateEmail && userUpdateEmail.id_usuario !== id_usuario)
             throw new AppError("Ja tem um usuario com esse email cadastrado !!");
 
+    }
+
+    private async validatePassword (password : string | undefined,
+                                    old_password : string | undefined,
+                                    user: IUser) : Promise <void>
+    {
         if (password && !old_password) throw new AppError("Senha antiga Requerida !!");
 
         if (password && old_password){
@@ -39,14 +58,7 @@ class UpdateUsersService
 
             user.password = await hash(password,8);
         }
-
-        user.nome = nome;
-        user.email = email;
-
-        await usersRepository.save(user);
-
-        return user;
     }
+
 }
 
-export default UpdateUsersService;

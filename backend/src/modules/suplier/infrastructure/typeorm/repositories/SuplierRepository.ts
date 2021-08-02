@@ -1,7 +1,7 @@
 import ICreateSuplier from "@modules/suplier/Domain/Models/ICreateSuplier";
 import ISupplier from "@modules/suplier/Domain/Models/ISupplier";
 import ISuplierRepository from "@modules/suplier/Domain/Repository/ISuplierRepository";
-import { getRepository,EntityRepository, Repository } from "typeorm";
+import { getRepository, Repository } from "typeorm";
 import Suplier from '../entities/Fornecedor';
 
 
@@ -43,9 +43,8 @@ export class SuplierRepository implements ISuplierRepository {
     public async create({nome, email, whatsapp}: ICreateSuplier): Promise<ISupplier> {
         const suplier = await this.ormRepository.create({nome, email,whatsapp});
 
-        await this.save(suplier);
 
-        return suplier;
+        return await this.save(suplier);
 
     }
     public async save(suplier: ISupplier): Promise<ISupplier>

@@ -1,7 +1,7 @@
 import AppError from "@shared/errors/error";
 import { inject, injectable } from "tsyringe";
-import ISuplierRepository from "../Domain/Repository/ISuplierRepository";
-import IDeleteSuplier from "../Domain/Models/IDeleteSuplier";
+import ISuplierRepository from "@modules/suplier/Domain/Repository/ISuplierRepository";
+import IDeleteSuplier from "@modules/suplier/Domain/Models/IDeleteSuplier";
 
 @injectable()
 export default class DeleteSuplierService {
