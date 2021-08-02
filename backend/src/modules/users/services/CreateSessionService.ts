@@ -1,5 +1,5 @@
 import AppError from "@shared/errors/error";
-import authConfig from '@config/auth'
+import authConfig from "@config/auth"
 import { compare, hash } from "bcryptjs";
 import {sign} from "jsonwebtoken"
 import { inject, injectable } from "tsyringe";

@@ -1,17 +1,15 @@
-import {Request , Response} from 'express';
-import CreateUsersService from '../../../services/CreateUserService';
-import ShowUsersServiceByEmail from '../../../services/ShowUserServiceByEmail';
-import ListUsersService from '../../../services/ListUsersService';
-
-
-
+import {Request , Response} from "express";
+import { container } from "tsyringe";
+import CreateUsersService from "@modules/users/services/CreateUserService";
+import ShowUsersServiceByEmail from "@modules/users/services/ShowUserServiceByEmail";
+import ListUsersService from "@modules/users/services/ListUsersService";
 export default class UsersController{
 
     public async index (request : Request, response : Response):Promise<Response>
     {
 
-        const listUsers = new ListUsersService();
-        const userList = await listUsers.execute();
+        const listUsers = container.resolve(ListUsersService);
+        const userList = await listUsers.executeListUsers();
 
         return response.json(userList);
     }
@@ -21,9 +19,9 @@ export default class UsersController{
     {
         const {email} = request.params;
 
-        const showUserByEmail = new ShowUsersServiceByEmail();
+        const showUserByEmail = container.resolve(ShowUsersServiceByEmail);
 
-        const userSearchByEmail = await showUserByEmail.executeforsSearch({email});
+        const userSearchByEmail = await showUserByEmail.executeSearchByEmail({email});
 
         return response.json(userSearchByEmail);
     }
@@ -32,9 +30,9 @@ export default class UsersController{
     {
         const {nome, email, password} = request.body;
 
-        const createUserService = new CreateUsersService();
+        const createUserService = container.resolve(CreateUsersService);
 
-        const userCreate = await createUserService.execute({nome, email, password});
+        const userCreate = await createUserService.executeCreateUser({nome, email, password});
 
         return response.json(userCreate);
     }

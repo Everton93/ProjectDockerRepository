@@ -1,7 +1,7 @@
-import {Router} from 'express';
-import SuplierController from '../Controllers/SuplierController';
-import { celebrate, Joi, Segments } from 'celebrate';
-import isAuthenticated from '@shared/infrastructure/http/middlewares/isAuthenticated';
+import {Router} from "express";
+import SuplierController from "../Controllers/SuplierController";
+import { celebrate, Joi, Segments } from "celebrate";
+import isAuthenticated from "@shared/infrastructure/http/middlewares/isAuthenticated";
 
 const suplierRouter = Router();
 const fornecedorController = new SuplierController();

@@ -1,7 +1,9 @@
-import {Router} from 'express';
-import ProductController from '../Controllers/ProductController';
-import { celebrate, Joi, Segments } from 'celebrate';
-import isAuthenticated from '@shared/infrastructure/http/middlewares/isAuthenticated';
+import {Router} from "express";
+import ProductController from "@modules/products/infrastructure/http/Controllers/ProductController";
+import { celebrate, Joi, Segments } from "celebrate";
+import isAuthenticated from "@shared/infrastructure/http/middlewares/isAuthenticated";
+
+
 
 const productsRouter = Router();
 const produtoController = new ProductController();

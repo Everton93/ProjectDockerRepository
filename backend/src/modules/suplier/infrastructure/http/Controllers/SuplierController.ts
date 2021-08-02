@@ -1,10 +1,10 @@
-import {Request , Response} from 'express';
-import { container } from 'tsyringe';
-import CreateSuplierService from '../../../services/CreateSuplierService';
-import ShowSupplierService from '../../../services/ShowSuplierService';
-import ListSuplierService from '../../../services/ListSuplierService';
-import UpdateSuplierService from '../../../services/UpdateSuplierSevice';
-import DeleteSuplierService from '../../../services/DeleteSuplierService';
+import {Request , Response} from "express";
+import { container } from "tsyringe";
+import CreateSuplierService from "@modules/suplier/services/CreateSuplierService";
+import ShowSupplierService from "@modules/suplier/services/ShowSuplierService";
+import ListSuplierService from "@modules/suplier/services/ListSuplierService";
+import UpdateSuplierService from "@modules/suplier/services/UpdateSuplierSevice";
+import DeleteSuplierService from "@modules/suplier/services/DeleteSuplierService";
 
 
 export default class SuplierController{

@@ -1,16 +1,13 @@
-import {Router} from 'express';
-import ForgotPasswordController from '../Controllers/ForgotPasswordController';
-import ResetPasswordController from '../Controllers/ResetPasswordController';
-import { celebrate, Joi, Segments } from 'celebrate';
-import isAuthenticated from '@shared/infrastructure/http/middlewares/isAuthenticated';
+import {Router} from "express";
+import ForgotPasswordController from "../Controllers/ForgotPasswordController";
+import ResetPasswordController from "../Controllers/ResetPasswordController";
+import { celebrate, Joi, Segments } from "celebrate";
 
 
 const passwordRouter = Router();
 const forgotPasswordController = new ForgotPasswordController();
 const resetPasswordController = new ResetPasswordController();
 
-
-   passwordRouter.post('/test', forgotPasswordController.execute);
 
    passwordRouter.post(
     '/forgot',

@@ -2,7 +2,7 @@ import ICreateUser from "@modules/users/Domain/Models/ICreateUser";
 import IUser from "@modules/users/Domain/Models/IUser";
 import IUserRepository from "@modules/users/Domain/Repository/IUserRepository";
 import {getRepository, Repository } from "typeorm";
-import Users from '../entities/Usuario';
+import Users from "../entities/Usuario";
 
 
 export class UsersRepository implements IUserRepository {

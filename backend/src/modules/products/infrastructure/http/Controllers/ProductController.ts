@@ -1,11 +1,11 @@
-import {Request , Response} from 'express';
-import { container } from 'tsyringe';
-import CreateProductService from '@modules/products/services/CreateProductService'
-import DeleteProductService from '@modules/products/services/DeleteProductService';
-import ListProductService from '@modules/products/services/ListProductService';
-import ShowProductService from '@modules/products/services/ShowProductService';
-import ShowProductServiceByName from '@modules/products/services/ShowProductServiceByName';
-import UpdateProductService from '@modules/products/services/UpdateProductService';
+import {Request , Response} from "express";
+import { container } from "tsyringe";
+import CreateProductService from "@modules/products/services/CreateProductService";
+import DeleteProductService from "@modules/products/services/DeleteProductService";
+import ListProductService from "@modules/products/services/ListProductService";
+import ShowProductService from "@modules/products/services/ShowProductService";
+import ShowProductServiceByName from "@modules/products/services/ShowProductServiceByName";
+import UpdateProductService from "@modules/products/services/UpdateProductService";
 
 export default class ProductController{
 
