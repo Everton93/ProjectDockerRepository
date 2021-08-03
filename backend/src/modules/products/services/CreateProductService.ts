@@ -7,7 +7,7 @@ import IProductRepository from "@modules/products/Domain/Repository/IProductRepo
 @injectable()
 export default class CreateProductService {
     constructor(
-        @inject("productRepository")
+        @inject("ProductRepository")
         private productRepository: IProductRepository
     ) {}
 

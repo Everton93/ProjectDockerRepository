@@ -24,7 +24,7 @@ suplierRouter.use(isAuthenticated);
     celebrate({
         [Segments.BODY]:{
         nome: Joi.string().required(),
-        email : Joi.string().required(),
+        email : Joi.string().email().required(),
         whatsapp : Joi.string().required()
         },
     }),
@@ -35,7 +35,7 @@ suplierRouter.use(isAuthenticated);
     celebrate({
         [Segments.BODY]:{
         nome: Joi.string().required(),
-        email : Joi.string().required(),
+        email : Joi.string().email().required(),
         whatsapp : Joi.string().required()
         },
         [Segments.PARAMS]:{

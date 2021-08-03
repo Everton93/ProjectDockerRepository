@@ -9,7 +9,7 @@ export default class ShowProductServiceByName
 {
 
     constructor(
-        @inject("productRepository")
+        @inject("ProductRepository")
         private productRepository: IProductRepository
     ) {}
 
@@ -17,10 +17,7 @@ export default class ShowProductServiceByName
 
         const produto = await this.productRepository.findByName(nome);
 
-        if(!produto)
-        {
-            throw new AppError('Produto nao encontrado !!');
-        }
+        if(!produto) throw new AppError('Produto nao encontrado !!');
 
         return produto;
     }

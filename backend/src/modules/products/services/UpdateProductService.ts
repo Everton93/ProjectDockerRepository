@@ -9,7 +9,7 @@ class UpdateProductService
 {
 
     constructor(
-        @inject("productRepository")
+        @inject("ProductRepository")
         private productRepository: IProductRepository
     ) {}
 

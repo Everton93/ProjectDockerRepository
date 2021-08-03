@@ -9,7 +9,7 @@ import IProductRepository from "@modules/products/Domain/Repository/IProductRepo
 export default  class ShowProductService
 {
     constructor(
-        @inject("productRepository")
+        @inject("ProductRepository")
         private productRepository: IProductRepository
     ) {}
 

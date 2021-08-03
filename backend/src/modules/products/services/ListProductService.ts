@@ -6,7 +6,7 @@ import IProduct from "@modules/products/Domain/Models/IProduct";
 export default class ListProductService
 {
     constructor(
-        @inject("productRepository")
+        @inject("ProductRepository")
         private productRepository: IProductRepository
     ) {}
 

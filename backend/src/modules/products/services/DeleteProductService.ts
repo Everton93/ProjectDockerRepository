@@ -7,7 +7,7 @@ import IDeleteProduct from "@modules/products/Domain/Models/IDeleteProduct";
 export default class DeleteProductService
 {
     constructor(
-        @inject("productRepository")
+        @inject("ProductRepository")
         private productRepository: IProductRepository
     ) {}
 
