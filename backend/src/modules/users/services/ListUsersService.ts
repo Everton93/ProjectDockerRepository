@@ -12,7 +12,7 @@ export default class ListUserService
         private usersRepository : IUserRepository
          ){}
 
-    public async executeListUsers (): Promise<IUser[] | undefined>
+    public async executeListUsers (): Promise<Array<IUser> | undefined>
     {
         return await this.usersRepository.findAll();;
     }

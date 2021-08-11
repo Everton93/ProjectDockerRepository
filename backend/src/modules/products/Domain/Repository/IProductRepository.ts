@@ -3,7 +3,7 @@ import IProduct from "../Models/IProduct";
 
 export default interface IProductRepository
 {
-    findAll(): Promise<IProduct[]| undefined>;
+    findAll(): Promise<Array<IProduct>| undefined>;
     findById(id_produto: string): Promise<IProduct | undefined>;
     findByName(nome: string): Promise<IProduct | undefined>;
     create(data: ICreateProduct): Promise<IProduct>;

@@ -14,7 +14,7 @@ export class GuestRepository implements IGuestRepository {
          this.ormRepository = getRepository(Hospede);
     }
 
-    public async findAll(): Promise<IGuest[]>
+    public async findAll(): Promise<Array<IGuest>>
     {
         return await this.ormRepository.find();
     }

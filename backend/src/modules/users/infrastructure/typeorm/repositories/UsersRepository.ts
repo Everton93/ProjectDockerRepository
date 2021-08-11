@@ -26,7 +26,7 @@ export class UsersRepository implements IUserRepository {
         return await this.ormRepository.save(product);
     }
 
-    public async findAll(): Promise<IUser[]>
+    public async findAll(): Promise<Array<IUser>>
     {
         return await this.ormRepository.find();
     }

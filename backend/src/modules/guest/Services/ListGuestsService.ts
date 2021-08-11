@@ -10,7 +10,7 @@ export default class ListGuestsService {
         private guestRepository: IGuestRepository
     ) {}
 
-    public async executeListGuests(): Promise<IGuest [] | undefined>
+    public async executeListGuests(): Promise<Array<IGuest> | undefined>
     {
         return await this.guestRepository.findAll();
     }

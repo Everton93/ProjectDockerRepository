@@ -3,7 +3,7 @@ import IUser from "../Models/IUser";
 
 export default interface IUserRepository
 {
-    findAll(): Promise<IUser[]| undefined>;
+    findAll(): Promise<Array<IUser>| undefined>;
     findById(id_usuario: string): Promise<IUser | undefined>;
     findByEmail(nome: string): Promise<IUser | undefined>;
     create(data: ICreateUser): Promise<IUser>;

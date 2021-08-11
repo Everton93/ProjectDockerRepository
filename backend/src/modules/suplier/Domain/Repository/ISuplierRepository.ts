@@ -3,7 +3,9 @@ import ISuplier from "../Models/ISupplier";
 
 export default interface ISuplierRepository
  {
-    findAll(): Promise<ISuplier[]| undefined>;
+
+
+    findAll(): Promise<Array<ISuplier> | undefined>;
     findByName(nome: string): Promise<ISuplier | undefined>;
     findById(id_fornecedor: string): Promise<ISuplier | undefined>;
     findByEmail(email: string): Promise<ISuplier | undefined>;

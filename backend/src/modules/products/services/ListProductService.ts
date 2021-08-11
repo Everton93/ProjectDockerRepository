@@ -10,7 +10,7 @@ export default class ListProductService
         private productRepository: IProductRepository
     ) {}
 
-    public async listAllProducts (): Promise<IProduct[] | undefined>
+    public async listAllProducts (): Promise<Array<IProduct> | undefined>
     {
         return await this.productRepository.findAll();
     }

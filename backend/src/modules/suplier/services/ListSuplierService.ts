@@ -10,7 +10,7 @@ export default class ListSuplierService
         private suplierRepository: ISuplierRepository
     ) {}
 
-    public async execute (): Promise<ISuplier[] | undefined>
+    public async execute (): Promise<Array<ISuplier> | undefined>
     {
 
         return await this.suplierRepository.findAll();

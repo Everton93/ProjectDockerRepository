@@ -20,6 +20,14 @@ export class CreateGuest1625024345605 implements MigrationInterface {
                     type : 'varchar'
                 },
                 {
+                    name: 'idade',
+                    type : 'varchar'
+                },
+                {
+                    name: 'cpf',
+                    type : 'decimal'
+                },
+                {
                     name: 'email',
                     type : 'varchar',
                 },

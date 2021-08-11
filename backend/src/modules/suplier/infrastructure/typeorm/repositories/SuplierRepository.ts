@@ -53,7 +53,7 @@ export class SuplierRepository implements ISuplierRepository {
 
     }
 
-    public async findAll(): Promise<ISupplier[] | undefined>
+    public async findAll(): Promise<Array<ISupplier> | undefined>
     {
         return await this.ormRepository.find();
     }
