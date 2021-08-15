@@ -1,4 +1,4 @@
 export default interface IShowReserveByRoom
 {
-    numero_quarto : number;
+    quarto_id : string;
 }

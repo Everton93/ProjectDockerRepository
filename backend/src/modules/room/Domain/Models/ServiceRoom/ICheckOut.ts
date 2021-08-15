@@ -1,5 +1,5 @@
-import IServiceRoom from "./IServiceRoom"
-import { status_reserva } from "./StatusReserve";
+import IServiceRoom from "@modules/room/Domain/Models/ServiceRoom/IServiceRoom"
+import { status_reserva } from "@modules/room/Domain/Models/Reserve/StatusReserve";
 
 export default interface ICheckOut
 {

@@ -64,3 +64,4 @@ export class SuplierRepository implements ISuplierRepository {
     }
 
 }
+

@@ -3,7 +3,7 @@ import Fornecedor from "@modules/suplier/infrastructure/typeorm/entities/Fornece
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 
 @Entity('Produto')
-class Produto implements IProduct {
+export default class Produto implements IProduct {
 
     @PrimaryGeneratedColumn('uuid')
     id_produto : string;
@@ -31,5 +31,5 @@ class Produto implements IProduct {
 
 }
 
-export default Produto;
+
 

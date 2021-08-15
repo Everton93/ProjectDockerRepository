@@ -23,6 +23,7 @@ export class CreateReserve1628289551485 implements MigrationInterface {
                     {
                         name: "quarto_id",
                         type: "uuid",
+                        isNullable: true,
                         isUnique: true,
                     },
                     {
@@ -30,13 +31,9 @@ export class CreateReserve1628289551485 implements MigrationInterface {
                         type: "decimal",
                     },
                     {
-                        name: "descricao",
-                        type: "varchar",
-                    },
-                    {
                         name: "status_reserva",
                         type: "enum",
-                        enum: ["Pendente", "Ativa", "Checkout"],
+                        enum: ["PENDENTE", "ATIVA"],
                     },
                     {
                         name: "data_de_entrada",
@@ -52,18 +49,19 @@ export class CreateReserve1628289551485 implements MigrationInterface {
 
                 foreignKeys: [
                     {
-                        name: "hospedeid",
-                        referencedTableName: "Hospede",
-                        referencedColumnNames: ["id_hospede"],
-                        columnNames: ["hospede_id"],
-                        onDelete: "CASCADE",
-                        onUpdate: "CASCADE",
-                    },
-                    {
                         name: "quartoid",
                         referencedTableName: "Quarto",
                         referencedColumnNames: ["id_quarto"],
                         columnNames: ["quarto_id"],
+                        onDelete: "CASCADE",
+                        onUpdate: "CASCADE"
+                    },
+                    {
+
+                        name: "hospedeid",
+                        referencedTableName: "Hospede",
+                        referencedColumnNames: ["id_hospede"],
+                        columnNames: ["hospede_id"],
                         onDelete: "CASCADE",
                         onUpdate: "CASCADE",
                     },
@@ -73,7 +71,10 @@ export class CreateReserve1628289551485 implements MigrationInterface {
 
     }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
+    public async down(queryRunner: QueryRunner): Promise<void>
+    {
+        await queryRunner.dropTable('ReservaDeQuartos');
     }
 
 }
+

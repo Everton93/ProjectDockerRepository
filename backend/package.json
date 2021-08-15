@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infrastructure/http/server.ts",
+    "start": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infrastructure/http/server.ts",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
@@ -27,10 +27,11 @@
     "faker": "^5.5.3",
     "handlebars": "^4.7.7",
     "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
     "nodemailer": "^6.6.3",
+    "pg": "^8.7.1",
+    "postgresql": "0.0.1",
     "reflect-metadata": "^0.1.13",
-    "sqlite": "^4.0.23",
-    "sqlite3": "^5.0.2",
     "ts-node": "^10.0.0",
     "tsyringe": "^4.6.0",
     "typeorm": "^0.2.34"

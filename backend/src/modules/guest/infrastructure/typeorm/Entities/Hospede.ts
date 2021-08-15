@@ -30,5 +30,3 @@ export default class Hospede implements IGuest
     data_de_atualizacao: Date;
 
 }
-
-

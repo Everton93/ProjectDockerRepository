@@ -7,3 +7,7 @@ export default interface ICreateReserve
     quarto : string;
     status : status_reserva;
 }
+
+
+
+

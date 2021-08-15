@@ -24,5 +24,3 @@ export default class Fornecedor implements ISuplier {
 
 }
 
-
-

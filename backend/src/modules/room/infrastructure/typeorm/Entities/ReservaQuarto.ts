@@ -1,5 +1,5 @@
-import IReserve from "@modules/room/Domain/Models/IReserve";
-import { status_reserva } from "@modules/room/Domain/Models/StatusReserve";
+import IReserve from "@modules/room/Domain/Models/Reserve/IReserve";
+import { status_reserva } from "@modules/room/Domain/Models/Reserve/StatusReserve";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('ReservaDeQuartos')
@@ -9,13 +9,13 @@ export default class ReservaDeQuarto implements IReserve
     id_reserva: string;
 
     @Column()
-    hospede: string;
+    hospede_id: string;
 
     @Column()
     acompanhantes: number;
 
     @Column()
-    quarto: string;
+    quarto_id: string;
 
     @CreateDateColumn()
     data_reserva: Date;

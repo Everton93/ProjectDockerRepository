@@ -5,17 +5,18 @@ import 'express-async-errors';
 import routes from './routes';
 import {errors} from 'celebrate'
 import AppError from '@shared/errors/error';
-import '@shared/infrastructure/typeorm';
 import '@shared/container';
+import '@shared/infrastructure/typeorm';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use(routes);
+//app.use(routes);
 
 app.use(errors());
+
 
 app.use((
     error: Error ,
@@ -36,6 +37,6 @@ app.use((
         })
     });
 
-app.listen(3333, () => {
-    console.log('iniciando o servidor pela porta 3333');
+app.listen(3030, () => {
+    console.log('iniciando o servidor pela porta 3030');
 });

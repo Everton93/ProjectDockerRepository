@@ -31,3 +31,4 @@ export default class ProfileController
         return response.json(user);
     }
 }
+

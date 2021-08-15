@@ -3,8 +3,6 @@ import ProductController from "@modules/products/infrastructure/http/Controllers
 import { celebrate, Joi, Segments } from "celebrate";
 import isAuthenticated from "@shared/infrastructure/http/middlewares/isAuthenticated";
 
-
-
 const productsRouter = Router();
 const produtoController = new ProductController();
 
@@ -66,7 +64,4 @@ productsRouter.delete(
     }),
     produtoController.deleteProduct);
 
-
 export default productsRouter;
-
-

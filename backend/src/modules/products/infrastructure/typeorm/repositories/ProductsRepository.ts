@@ -54,13 +54,5 @@ export class ProductsRepository implements IProductRepository {
     public async delete(product: IProduct): Promise<void> {
         await this.ormRepository.delete(product);
     }
-
-    /*     public async findByidSupplier(id_fornecedor: string) : Promise<Product | undefined>
-    {
-            return await this.findOne({
-                where: {
-                 : id_produto,
-                },
-                });
-    } */
 }
+

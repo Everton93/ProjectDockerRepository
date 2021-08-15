@@ -1,10 +1,8 @@
-
 import ICreateGuest from "@modules/guest/Domain/Models/ICreateGuest";
 import IGuest from "@modules/guest/Domain/Models/IGuest";
 import IGuestRepository from "@modules/guest/Domain/Repository/IGuestRepository";
 import {getRepository, Repository } from "typeorm";
 import Hospede from "../Entities/Hospede";
-
 
 export class GuestRepository implements IGuestRepository {
 

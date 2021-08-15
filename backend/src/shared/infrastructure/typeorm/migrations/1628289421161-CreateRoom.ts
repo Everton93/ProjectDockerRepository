@@ -12,6 +12,7 @@ export class CreateRoom1628289421161 implements MigrationInterface {
                     name : 'id_quarto',
                     type : 'uuid',
                     generationStrategy: 'uuid',
+                    isUnique : true,
                     default : 'uuid_generate_v4()'
                 },
                 {
@@ -19,10 +20,16 @@ export class CreateRoom1628289421161 implements MigrationInterface {
                     type : 'decimal',
                 },
                 {
-                    name : 'tipos_quartos' ,
+                    name : 'tiposquartos' ,
+                    enumName : 'tipos_quartos',
                     type : 'enum' ,
                     enum : [ 'Quarto', 'Suite', 'Executivo' ] ,
-                } ,
+                },
+                {
+                    name : 'status_quarto' ,
+                    type : 'enum' ,
+                    enum : [ 'Vazio', 'Ocupado'] ,
+                },
                 {
                     name: 'descricao',
                     type : 'varchar',

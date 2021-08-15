@@ -15,3 +15,4 @@ container.registerSingleton<IProductRepository>('ProductsRepository', ProductsRe
 container.registerSingleton<IUserRepository>('UsersRepository', UsersRepository);
 container.registerSingleton<IUserTokenRepository>('UsersTokenRepository', UsersTokenRepository);
 container.registerSingleton<IGuestRepository>('GuestRepository', GuestRepository);
+

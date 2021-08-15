@@ -1,4 +1,4 @@
 export default interface IShowReserveByGuest
 {
-    hospede : string;
+    hospede_id : string;
 }

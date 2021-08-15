@@ -25,9 +25,7 @@ export class CreateProduct1624481103446 implements MigrationInterface {
                 },
                 {
                     name : 'preco',
-                    type : 'decimal',
-                    scale : 10,
-                    precision : 2
+                    type : 'decimal'
                 },
                 {
                     name : 'quantidade',
@@ -69,6 +67,4 @@ export class CreateProduct1624481103446 implements MigrationInterface {
          await queryRunner.dropTable('Produto');
     }
 }
-
-
 

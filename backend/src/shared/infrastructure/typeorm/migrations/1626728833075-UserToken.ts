@@ -41,7 +41,7 @@ export class UserToken1626728833075 implements MigrationInterface {
             foreignKeys :[
                 {
                 name: 'UsuarioToken',
-                referencedTableName: 'usuario',
+                referencedTableName: 'Usuario',
                 referencedColumnNames : ['id_usuario'],
                 columnNames: ['usuario_id'],
                 onDelete : 'CASCADE',
