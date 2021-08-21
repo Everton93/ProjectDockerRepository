@@ -1,33 +1,64 @@
-/* import ICreateServiceRoom from "@modules/room/Domain/Models/ICreateServiceRoom";
-import IListServiceRoomByRoom from "@modules/room/Domain/Models/IListServiceRoomByRoom";
-import IServiceRoom from "@modules/room/Domain/Models/IServiceRoom";
-import IShowServiceById from "@modules/room/Domain/Models/IShowServiceById";
-import IShowServiceByRoom from "@modules/room/Domain/Models/IShowServiceByRoom";
+import ICreateServiceRoom from "@modules/room/Domain/Models/ServiceRoom/ICreateServiceRoom";
+import IListServiceRoomByRoom from "@modules/room/Domain/Models/ServiceRoom/IListServiceRoomByRoom";
+import IServiceRoom from "@modules/room/Domain/Models/ServiceRoom/IServiceRoom";
 import IServiceRoomRepository from "@modules/room/Domain/Repository/IServiceRoomRepository";
 import { getRepository, Repository } from "typeorm";
+import ServicoDeQuarto from "../Entities/ServicoDeQuarto";
 
 export default class ServiceRoomRepository implements IServiceRoomRepository
 {
 
-    private ormRepository : Repository<>
+    private ormRepository : Repository<ServicoDeQuarto>
 
-    constructor(){
-         this.ormRepository = getRepository();
+    constructor()
+    {
+         this.ormRepository = getRepository("ServicoDeQuarto");
     }
 
-    public async listAllServicesRoomByRoom(numero_quarto: IListServiceRoomByRoom): Promise<IServiceRoom[]> {
-        throw new Error("Method not implemented.");
+    public async listAll(): Promise<IServiceRoom[]> {
+        return await this.ormRepository.find();
     }
-    public async CreateServiceRoom(data: ICreateServiceRoom): Promise<IServiceRoom> {
-        throw new Error("Method not implemented.");
+
+    public async listAllServicesRoomByRoom(id: string): Promise<IServiceRoom[]>
+    {
+        return await this.ormRepository.find({
+            where: {
+                quarto_id : id,
+            }
+        });
     }
-    public async showServiceRoomById(id_servico: IShowServiceById): Promise<IServiceRoom> {
-        throw new Error("Method not implemented.");
+
+    public async create(data: ICreateServiceRoom): Promise<IServiceRoom>
+    {
+        await this.ormRepository.create(data);
+
+        return await this.ormRepository.save(data);
     }
-    public async showServiceRoomByRoom(id_servico: IShowServiceByRoom): Promise<IServiceRoom> {
-        throw new Error("Method not implemented.");
+    public async findById(id : string): Promise<IServiceRoom| undefined>
+    {
+        return await this.ormRepository.findOne({
+            where: {
+                id_servico : id,
+            }
+        });
+    }
+    public async findByRoom(id : string): Promise<IServiceRoom | undefined>
+    {
+        return await this.ormRepository.findOne({
+            where: {
+                quarto_id : id,
+            }
+        });
+    }
+
+    public async save(data: IServiceRoom): Promise<IServiceRoom>
+    {
+        return await this.ormRepository.save(data);
+    }
+
+    public async delete(data: IServiceRoom): Promise<void>
+    {
+        await this.ormRepository.delete(data);
     }
 
 }
-
- */

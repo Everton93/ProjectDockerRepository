@@ -1,4 +1,4 @@
 export default interface IShowRoomByNumber
 {
-    numero_quarto : number;
+    numero_quarto : string;
 }

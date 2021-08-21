@@ -1,4 +1,4 @@
 export default interface IListServiceRoomByRoom
 {
-    numero_quarto : number;
+    id_quarto : string;
 }

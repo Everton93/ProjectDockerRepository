@@ -1,11 +1,11 @@
-import { status_reserva } from "./StatusReserve";
+import { Status_reserva } from "./StatusReserve";
 
 export default interface ICreateReserve
 {
-    hospede : string;
+    hospede_id : string;
     acompanhantes: number;
-    quarto : string;
-    status : status_reserva;
+    quarto_id : string;
+    status : Status_reserva;
 }
 
 

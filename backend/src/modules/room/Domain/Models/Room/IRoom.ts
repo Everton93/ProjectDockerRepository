@@ -7,5 +7,5 @@ export default interface IRoom
     numero_quarto : number;
     tipos_quartos: Quartos_Tipos;
     descricao: string;
-    status : Status_Quarto;
+    status_quarto : Status_Quarto;
 }

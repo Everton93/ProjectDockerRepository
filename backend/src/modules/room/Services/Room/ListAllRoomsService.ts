@@ -1,18 +1,18 @@
 import { inject, injectable } from "tsyringe";
-import IRoomRepository from "@modules/room/Domain/Repository/IRoomRepository";
 import IRoom from "@modules/room/Domain/Models/Room/IRoom";
+import IRoomsRepository from "@modules/room/Domain/Repository/IRoomsRepository";
 
 @injectable()
 export default class ListAllRoomsService
 {
     constructor(
         @inject('RoomRepository')
-        private readonly roomRepository : IRoomRepository
+        private readonly roomRepository : IRoomsRepository
          ){}
 
         public async executeList() : Promise <IRoom[]>
         {
-            return await this.roomRepository.listAllRooms();
+            return await this.roomRepository.listAll();
         }
 
 

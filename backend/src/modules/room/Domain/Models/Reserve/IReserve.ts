@@ -1,4 +1,4 @@
-import { status_reserva } from "@modules/room/Domain/Models/Reserve/StatusReserve";
+import { Status_reserva } from "@modules/room/Domain/Models/Reserve/StatusReserve";
 
 export default interface IReserve
 {
@@ -6,9 +6,9 @@ export default interface IReserve
     hospede_id : string;
     acompanhantes: number;
     quarto_id : string;
-    data_reserva : Date;
-    data_entrada : Date;
-    status : status_reserva;
+    data_de_entrada : Date;
+    data_de_saida : Date;
+    status : Status_reserva;
 }
 
 

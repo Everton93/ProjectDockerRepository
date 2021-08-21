@@ -1,7 +1,7 @@
 import IReserve from "@modules/room/Domain/Models/Reserve/IReserve";
 import ICreateReserve from "@modules/room/Domain/Models/Reserve/ICreateReserve";
 import IReserveRepository from "@modules/room/Domain/Repository/IReserveRepository";
-import IGuestRepository from "@modules/guest/Domain/Repository/IGuestRepository";
+import { Status_reserva } from "@modules/room/Domain/Models/Reserve/StatusReserve";
 import AppError from "@shared/errors/error";
 import { inject, injectable } from "tsyringe";
 
@@ -16,20 +16,26 @@ export default class CreateReserveService
 
     public async executeCreateReserve(
         {
-        hospede,
+        hospede_id,
         acompanhantes,
-        quarto,
-        status }: ICreateReserve): Promise<IReserve>
+        quarto_id,
+        status
+        }: ICreateReserve): Promise<IReserve>
     {
-        const reserve = await this.reserveRepository.findByGuest(hospede);
+        const reserveSearch = await this.reserveRepository.findByGuest(hospede_id);
 
-        if (reserve) throw new AppError("Ja consta uma reserva para esse hospede");
+        if (reserveSearch) throw new AppError("Ja consta uma reserva para esse hospede");
 
-        return await this.reserveRepository.create({hospede, acompanhantes,quarto, status});
+        const reserve = await this.reserveRepository.create(
+            {
+                hospede_id,
+                acompanhantes,
+                quarto_id,
+                status
+            });
 
-
+        return reserve;
     }
-
 }
 
 

@@ -1,7 +1,6 @@
-export enum status_reserva
+export enum Status_reserva
 {
     em_espera = "PENDENTE",
     reservado = "RESERVADO",
-    check_in = "CHECK IN",
-    check_out = "CHECK OUT"
+    pago = "PAGO"
 }

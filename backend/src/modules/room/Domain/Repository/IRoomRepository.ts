@@ -1,11 +1,8 @@
-import IRoom from "@modules/room/Domain/Models/Room/IRoom";
-import IShowRoomByNumber from "@modules/room/Domain/Models/Room/IShowRoomByNumber";
-
-export default interface IRoomRepository
+export default interface IRoomRepository <T>
 {
-    listAllRooms(): Promise<Array<IRoom>>;
-    findByNumber({numero_quarto} :IShowRoomByNumber): Promise<IRoom | undefined>;
-    findbyId(id : string): Promise<IRoom | undefined>;
-    save(room: IRoom): Promise<IRoom>;
-
+    listAll () :Promise <Array<T>>;
+    create (data : T) : Promise<T>;
+    findById(id : string ) : Promise<T | undefined>;
+    delete( data : T ) : Promise<void>;
+    save(data: T): Promise<T>;
 }

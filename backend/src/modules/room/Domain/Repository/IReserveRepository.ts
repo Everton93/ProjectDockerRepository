@@ -1,14 +1,9 @@
-import ICreateReserve from "@modules/room/Domain/Models/Reserve/ICreateReserve";
-import IReserve from "@modules/room/Domain/Models/Reserve/IReserve";
+import ICreateReserve from "../Models/Reserve/ICreateReserve";
+import IReserve from "../Models/Reserve/IReserve";
+import IRoomRepository from "./IRoomRepository";
 
-export default interface IReserveRepository
+export default interface IReserveRepository extends IRoomRepository<IReserve>
 {
-    listAll () :Promise <Array<IReserve>>;
-    create (data : ICreateReserve) : Promise<IReserve>;
-    findByid(id_reserva : string ) : Promise<IReserve | undefined>;
-    findByGuest(hospede_id : string ) : Promise<IReserve | undefined>;
-    findByRoom(quarto_id : string ) : Promise<IReserve | undefined>;
-    delete( reserve : IReserve ) : Promise<void>;
-    save(reserve: IReserve): Promise<IReserve>;
-
+    create (data : ICreateReserve): Promise<IReserve>;
+    findByGuest(id: string): Promise<IReserve | undefined>;
 }

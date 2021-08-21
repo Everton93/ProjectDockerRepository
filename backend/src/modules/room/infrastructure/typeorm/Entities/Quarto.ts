@@ -7,7 +7,6 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity('Quarto')
 export default class Quarto implements IRoom
 {
-    status: Status_Quarto;
     @PrimaryGeneratedColumn('uuid')
     id_quarto: string;
 
