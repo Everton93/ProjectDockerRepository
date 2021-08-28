@@ -1,5 +1,12 @@
 import IUser from "@modules/users/Domain/Models/IUser";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { 
+    Column, 
+    CreateDateColumn, 
+    Entity, 
+    PrimaryGeneratedColumn, 
+    UpdateDateColumn } from "typeorm";
+import {Exclude} from "class-transformer";
+
 
 @Entity('Usuario')
 export default class Usuario implements IUser
@@ -14,9 +21,11 @@ export default class Usuario implements IUser
     email : string;
 
     @Column()
+    @Exclude()
     password : string;
 
     @Column()
+    @Exclude()
     avatar : string;
 
     @CreateDateColumn()

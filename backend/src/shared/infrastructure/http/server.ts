@@ -1,17 +1,22 @@
-import 'reflect-metadata';
-import express, {NextFunction, Request, Response} from 'express';
+import "reflect-metadata";
+import express, {NextFunction, Request, Response} from "express";
+import "dotenv/config";
 import cors from 'cors';
-import 'express-async-errors';
-import routes from './routes';
-import {errors} from 'celebrate'
-import AppError from '@shared/errors/error';
-import '@shared/container';
-import '@shared/infrastructure/typeorm';
+import "express-async-errors";
+import routes from "@shared/infrastructure/http/routes/index";
+import {errors} from "celebrate"
+import AppError from "@shared/errors/error";
+import "@shared/container";
+import "@shared/infrastructure/typeorm";
+import rateLimiter from "@shared/infrastructure/http/middlewares/RateLimiter";
 
 const app = express();
 
 app.use(cors());
+
 app.use(express.json());
+
+app.use(rateLimiter);
 
 app.use(routes);
 

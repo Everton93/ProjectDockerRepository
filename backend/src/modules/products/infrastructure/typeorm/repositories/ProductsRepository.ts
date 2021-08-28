@@ -11,7 +11,7 @@ export class ProductsRepository implements IProductRepository {
         this.ormRepository = getRepository(Product);
     }
 
-    public async findAll(): Promise<Array<IProduct> | undefined> {
+    public async findAll(): Promise<Array<IProduct>> {
         return this.ormRepository.find();
     }
 

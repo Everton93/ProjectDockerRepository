@@ -5,7 +5,8 @@ import CheckOut from "@modules/room/infrastructure/typeorm/Entities/CheckOut";
 import { getRepository } from "typeorm";
 import { Repository } from "typeorm/repository/Repository";
 
-export default class CheckOutRepository implements ICheckOutRepository
+export default class CheckOutRepository 
+implements Omit<ICheckOutRepository,"listAll" | "findById" | "findByRoom" | "delete" > 
 {
 
     private readonly ormRepository : Repository<CheckOut>
@@ -15,12 +16,6 @@ export default class CheckOutRepository implements ICheckOutRepository
          this.ormRepository = getRepository(CheckOut);
     }
 
-    public async listAll(): Promise<ICheckOut[]>
-    {
-        return await this.ormRepository.find();
-    }
-
-
     public async create(data: ICreateCheckOut): Promise<ICheckOut>
     {
         const check = await this.ormRepository.create(data);
@@ -28,33 +23,9 @@ export default class CheckOutRepository implements ICheckOutRepository
         return await this.ormRepository.save(check);
     }
 
-    public async findById(id: string): Promise<ICheckOut | undefined>
-    {
-        return await this.ormRepository.findOne(
-            {
-                where: {
-                    id_checkout: id,
-                },
-            });
-    }
-
-    public async findByRoom(id: string): Promise<ICheckOut | undefined>
-    {
-        return await this.ormRepository.findOne(
-            {
-                where: {
-                    quarto_id : id,
-                },
-            });
-    }
-
     public async save(reserve: ICheckOut): Promise<ICheckOut>
     {
        return await this.ormRepository.save(reserve);
     }
 
-    public async delete(data: ICheckOut): Promise<void>
-    {
-        await this.ormRepository.delete(data);
-    }
 }

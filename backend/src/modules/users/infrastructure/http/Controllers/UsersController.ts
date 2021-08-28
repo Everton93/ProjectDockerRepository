@@ -3,15 +3,18 @@ import { container } from "tsyringe";
 import CreateUsersService from "@modules/users/services/CreateUserService";
 import ShowUsersServiceByEmail from "@modules/users/services/ShowUserServiceByEmail";
 import ListUsersService from "@modules/users/services/ListUsersService";
+import {classToClass} from "class-transformer"
+
+
 export default class UsersController{
 
-    public async index (request : Request, response : Response):Promise<Response>
+    public async index (response : Response):Promise<Response>
     {
 
         const listUsers = container.resolve(ListUsersService);
         const userList = await listUsers.executeListUsers();
 
-        return response.json(userList);
+        return response.json(classToClass(userList));
     }
 
 
@@ -23,7 +26,7 @@ export default class UsersController{
 
         const userSearchByEmail = await showUserByEmail.executeSearchByEmail({email});
 
-        return response.json(userSearchByEmail);
+        return response.json(classToClass(userSearchByEmail));
     }
 
     public async createUser (request : Request, response : Response):Promise<Response>
@@ -34,7 +37,7 @@ export default class UsersController{
 
         const userCreate = await createUserService.executeCreateUser({nome, email, password});
 
-        return response.json(userCreate);
+        return response.json(classToClass(userCreate));
     }
 }
 

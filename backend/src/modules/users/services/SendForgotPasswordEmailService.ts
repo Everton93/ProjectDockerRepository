@@ -37,7 +37,7 @@ export default class SendForgotPasswordEmailService
                     file:  forgotPassworFile,
                     variables : {
                         name : user.nome,
-                        link : `http://localhost:3333/reset?token=${token}`
+                        link : `${process.env.APP_WEB_URL}/reset?token=${token}`
                     },
                 },
             });

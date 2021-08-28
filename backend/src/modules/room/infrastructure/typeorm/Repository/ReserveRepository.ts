@@ -4,7 +4,8 @@ import { getRepository, Repository } from "typeorm";
 import IReserveRepository from "@modules/room/Domain/Repository/IReserveRepository";
 import ICreateReserve from "@modules/room/Domain/Models/Reserve/ICreateReserve";
 
-export default class ReserveRepository implements IReserveRepository
+export default class ReserveRepository implements 
+Omit<IReserveRepository,"delete" >
 {
 
     private readonly ormRepository : Repository<ReservaQuarto>
@@ -43,11 +44,6 @@ export default class ReserveRepository implements IReserveRepository
                     hospede_id: id,
                 },
             });
-    }
-
-    public async delete(reserve: IReserve): Promise<void>
-    {
-         await this.ormRepository.delete(reserve);
     }
 
     public async save(reserve: IReserve): Promise<IReserve> {

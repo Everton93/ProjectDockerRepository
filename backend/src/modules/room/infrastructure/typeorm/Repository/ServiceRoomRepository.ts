@@ -1,11 +1,11 @@
 import ICreateServiceRoom from "@modules/room/Domain/Models/ServiceRoom/ICreateServiceRoom";
-import IListServiceRoomByRoom from "@modules/room/Domain/Models/ServiceRoom/IListServiceRoomByRoom";
 import IServiceRoom from "@modules/room/Domain/Models/ServiceRoom/IServiceRoom";
 import IServiceRoomRepository from "@modules/room/Domain/Repository/IServiceRoomRepository";
 import { getRepository, Repository } from "typeorm";
 import ServicoDeQuarto from "../Entities/ServicoDeQuarto";
 
-export default class ServiceRoomRepository implements IServiceRoomRepository
+export default class ServiceRoomRepository implements Omit<IServiceRoomRepository,"delete" >
+
 {
 
     private ormRepository : Repository<ServicoDeQuarto>
@@ -54,11 +54,6 @@ export default class ServiceRoomRepository implements IServiceRoomRepository
     public async save(data: IServiceRoom): Promise<IServiceRoom>
     {
         return await this.ormRepository.save(data);
-    }
-
-    public async delete(data: IServiceRoom): Promise<void>
-    {
-        await this.ormRepository.delete(data);
     }
 
 }

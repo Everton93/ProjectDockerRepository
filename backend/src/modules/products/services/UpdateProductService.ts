@@ -1,3 +1,4 @@
+import RedisCache from "@shared/cache/redisCache";
 import AppError from "@shared/errors/error";
 import { inject, injectable } from "tsyringe";
 import IProduct from "../Domain/Models/IProduct";
@@ -22,6 +23,11 @@ class UpdateProductService
         const product = await this.productRepository.findById(id_produto);
 
         if(!product) throw new AppError('Produto não encontrado!!');
+        
+        const redisCache = new RedisCache();
+
+        await redisCache.invalidate('api-vendas-PRODUCT_LIST');
+    
 
         product.nome = nome;
         product.descricao = descricao;

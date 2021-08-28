@@ -3,7 +3,8 @@ import IRoom from "@modules/room/Domain/Models/Room/IRoom";
 import IRoomsRepository from "@modules/room/Domain/Repository/IRoomsRepository";
 import { getRepository, Repository } from "typeorm";
 
-export default class RoomsRepository implements IRoomsRepository
+export default class RoomsRepository implements Omit<IRoomsRepository,"delete" >
+
 {
 
     private readonly ormRepository : Repository<IRoom>
@@ -48,8 +49,4 @@ export default class RoomsRepository implements IRoomsRepository
         return this.ormRepository.save(room);
     }
 
-    public async delete(data: IRoom): Promise<void>
-    {
-        this.ormRepository.delete(data);
-    }
 }

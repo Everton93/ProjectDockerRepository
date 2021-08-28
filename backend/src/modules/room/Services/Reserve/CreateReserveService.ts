@@ -4,6 +4,7 @@ import IReserveRepository from "@modules/room/Domain/Repository/IReserveReposito
 import { Status_reserva } from "@modules/room/Domain/Models/Reserve/StatusReserve";
 import AppError from "@shared/errors/error";
 import { inject, injectable } from "tsyringe";
+import RedisCache from "@shared/cache/redisCache";
 
 
 @injectable()
@@ -22,10 +23,14 @@ export default class CreateReserveService
         status
         }: ICreateReserve): Promise<IReserve>
     {
+        const redisCache = new RedisCache();
+
         const reserveSearch = await this.reserveRepository.findByGuest(hospede_id);
 
         if (reserveSearch) throw new AppError("Ja consta uma reserva para esse hospede");
 
+        await redisCache.invalidate("api_pousada_RESERVE_LIST");
+    
         const reserve = await this.reserveRepository.create(
             {
                 hospede_id,
@@ -37,5 +42,3 @@ export default class CreateReserveService
         return reserve;
     }
 }
-
-
